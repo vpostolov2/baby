@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Princess goes home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f4f6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .timeline {
+            position: relative;
+            width: 80%;
+            max-width: 600px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background-color: #ccc;
+            transform: translateX(-50%);
+        }
+
+        .step {
+            position: relative;
+            display: flex;
+            align-items: center;
+            margin-bottom: 50px;
+        }
+
+        .step:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .step .icon {
+            width: 60px;
+            height: 60px;
+            background-color: #4f46e5;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-size: 24px;
+            font-weight: bold;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step .content {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            width: 60%;
+            position: relative;
+        }
+
+        .step:nth-child(odd) .content {
+            margin-left: 15px;
+        }
+
+        .step:nth-child(even) .content {
+            margin-right: 15px;
+        }
+
+        .step .line {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 4px;
+            height: 100%;
+            background-color: #4f46e5;
+            transform: translateX(-50%);
+            z-index: 0;
+            animation: grow 1s forwards;
+        }
+
+        .step:last-child .line {
+            display: none;
+        }
+
+        @keyframes grow {
+            from {
+                height: 0;
+            }
+            to {
+                height: 100%;
+            }
+        }
+
+        .step img {
+            width: 100%;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .countdown {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #4f46e5;
+        }
+
+    </style>
+</head>
+<body>
+<div class="countdown" id="countdown">Loading timer...</div>
+<div class="timeline">
+    <div class="step">
+        <div class="icon">👸</div>
+        <div class="content">
+            <img src="https://hips.hearstapps.com/hmg-prod/images/rooftop-pool-bellahabana-sunset-18520-original-1497982970.jpg?resize=1200:*" alt="Hotel">
+        </div>
+        <div class="line"></div>
+    </div>
+
+    <div class="step">
+        <div class="icon">🚌</div>
+        <div class="content">
+            <img src="https://i.pinimg.com/564x/67/a4/22/67a422bae1ed80a98603f4e4d85762f9.jpg" alt="Bus">
+        </div>
+        <div class="line"></div>
+    </div>
+
+    <div class="step">
+        <div class="icon">✈️</div>
+        <div class="content">
+            <img src="https://images.theconversation.com/files/578175/original/file-20240227-28-cejldv.jpg?ixlib=rb-4.1.0&rect=0%2C0%2C7668%2C3828&q=45&auto=format&w=1356&h=668&fit=crop" alt="Plane">
+        </div>
+        <div class="line"></div>
+    </div>
+
+    <div class="step">
+        <div class="icon">🚗</div>
+        <div class="content">
+            <img src="https://www.motortrend.com/uploads/sites/10/2022/09/2023-toyota-camry-xse-hybrid-sedan-angular-front.png?w=768&width=768&q=75&format=webp" alt="Car">
+        </div>
+        <div class="line"></div>
+    </div>
+
+    <div class="step">
+        <div class="icon">🤓👸</div>
+        <div class="content">
+            <h3>🏠</h3>
+            <p>❤️❤️❤️</p>
+            <img src="https://l450v.alamy.com/450v/t9bng6/glass-of-red-wine-and-warm-scarf-against-cozy-fireplace-background-in-country-house-horizontal-hygge-home-sweet-home-t9bng6.jpg" alt="Home">
+        </div>
+    </div>
+</div>
+
+<script>
+    const countdownElement = document.getElementById('countdown');
+    const targetDate = new Date('2025-02-09T08:30:00+01:00'); // CET timezone
+
+    function updateCountdown() {
+        const now = new Date();
+        const difference = targetDate - now;
+
+        if (difference <= 0) {
+            countdownElement.textContent = "The time has arrived!";
+            return;
+        }
+
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+        countdownElement.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s until February 9, 8:30 AM CET`;
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown(); // Initial call
+</script>
+</body>
+</html>
